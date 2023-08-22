@@ -1,0 +1,70 @@
+When using a JComboBox as an editor in a column of a JTable
+ the same combo box is used for all rows in the column.
+ There may be times when you want different rows to use a different combo box.
+<!--more-->
+
+Two approaches I've seen to solve this problem would be:
+
+- override the getCellEditor() method of JTable to return the appropriate editor.
+ The row and column are passed as parameters to this method
+ so you would use those values (along with any other table data, if necessary) to determine which editor to use.
+
+- create a custom TableCellEditor and override the getTableCellEditorComponent() method to return the appropriate editor.
+ Again, the row, column and all table data is available to help in determining which editor to use.
+
+Theoretically you could have a different editor for every row in the table using either of the above approaches.
+ However my proposed solution, which is based on using a custom editor,
+ will assume that the choice of the editor to be used is based on some other data in the table.
+ That is, the value from another column in the same row will be used to determine the editor.
+ As a simple example you could have two related columns like "Month" and "Day".
+ The editor to be used to select a "Day" can only be determined once the "Month" has been selected.
+
+The ComboBoxTableEditor is a custom editor that uses a single combo box as the editor
+ but it allows you to specify different ComboBoxModels for different values in the related column.
+ Using the ComboboxTableEditor is straight forward.
+ First, you need to specify the related column, which is done when the ComboBoxTableEditor is created.
+ Secondly, you need to map possible values from this column to a specific ComboBoxModel.
+ This is done by using the addModel() method.
+
+image
+
+From the image above you can see that the first column contains 3 values: "Color, Fruit, Shape".
+ To create the custom editor for the second column we will need to create 3 separate models, one for each value.
+ The code would be something like:
+
+
+ComboBoxTableEditor editor = new ComboBoxTableEditor(0);
+table.getColumnModel().getColumn(1).setCellEditor( editor );
+
+String[] items1 = { "Red", "Blue", "Green" };
+editor.addModel("Color", items1);
+
+String[] items2 = { "Circle", "Square", "Triangle" };
+editor.addModel("Shape", items2);
+
+String[] items3 = { "Apple", "Orange", "Banana" };
+editor.addModel("Fruit", items3);
+
+As the values of the first column are dynamically changed,
+ the model used by the combo box editor in the second column will also be changed.
+
+Note, the Webstart demo uses code from the "Table Cell Listener" and "Combo Box Prompt" entries.
+
+
+<h3>Try The Demo</h3>
+<a href="http://www.camick.com/java/webstart/ComboBoxTableEditor.jnlp">
+<img class="alignnone size-full wp-image-949" style="border:0;"
+title="Click to start demo" src="http://tips4java.wordpress.com/files/2008/10/launch.png"
+alt="Launch" width="88" height="23" align="center" /></a> - Using Java&trade; Web Start (JRE 6 required)
+
+<h3>Get The Code</h3>
+<a href="http://www.camick.com/java/source/ComboBoxTableEditor.java">ComboBoxTableEditor.java</a>
+
+<h3>See Also</h3>
+<a href="http://tips4java.wordpress.com/2009/06/07/table-cell-listener/">Table Cell Listener</a>
+<a href="http://tips4java.wordpress.com/2008/10/18/combo-box-prompt/">Combo Box Prompt</a>
+<a href=""></a>
+
+<h3>Related Reading</h3>
+<a href="">Java Tutorials: </a>
+<a href="http://java.sun.com/javase/6/docs/api/?.html">Java API: ?</a>

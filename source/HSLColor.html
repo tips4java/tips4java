@@ -1,0 +1,63 @@
+The Color class in Java uses Red, Green and Blue (RGB) values to specify a Color.
+ I don't know about you, but I have no idea how to manipulate a given Color to return a related Color.
+ For example, how would you go about returning a "darker" or "lighter" color.
+ Sure the Color API supports brighter() and darker() methods,
+ but they don't seem to work that well and you can't control the degree of brightness or darkness.
+ The API also supports a HSB (Hue, Saturation, Brightness) color space which seemed promising,
+ but didn't	quite return the results I was looking for.
+<!--more-->
+
+So, I searched the web and found out about the HSL (Hue, Saturation, Luminance) color space
+ which is far easier for me to understand.
+ - "hue" represents the color (think colors of the rainbow).
+ Its value is specified in degrees. Red is 0, green is 120 and blue is 240.
+ - "saturation" represents the purity of the color.
+ Its value is specified as a percentage.
+ 100 percent is fully saturated and 0 percent is gray.
+ - "luminance" represents the brighness of the color.
+ Its value is specified as a percent.
+ 100 percent is white and 0 percent is black.
+
+As a result of this searching I ended up creating the HSLColor class.
+ This class provides methods that enable easy manipulation of the HSL values
+ to return a Color object that can be used by Java Components.
+ The easiest way to create a HSLColor object is to provide it with a Color object.
+ You would then create new Color objects by using the following methods:
+
+ - adjustHue - specify an(float degrees)
+ - adjustLuminance - specify an absolute percentage of luminance
+ - adjustSaturation - specify an absolute percentage of saturation
+ - adjustShade - adjusting the shade will give you a darker color.
+ You control how much darker the color is by specifying the adjustmnt percent.
+ - adjustTone - adjusting the tone will give you a lighter color.
+ You control how much lighter the color is by specifying the adjustment percent.
+ - getComplimentary - a complementary Color differs from its color by 180 degrees.
+
+The HSLColor class might come in handy when you want to use a color theme for your component.
+ Maybe you want to have a light background and dark foreground (or vice versa).
+ So instead of just using white and black you can use different shades and tones of a specific color.
+ Something like:
+
+HSLColor base = new HSLColor( Color.RED );
+component.setBackground( base.adjustTone(20) );
+component.setForeground( base.adjustShade(20) );
+
+Now, whatever base color you choose the background with be 20% lighter and the foreground 20% darker.
+
+...image
+
+The webstart demo is not intended to be a color chooser.
+ It is provided to give you an example of how the colors change as you adjust the different HSL values.
+ Hopefully this will make it easier for you to decide on a color theme.
+
+<h3>Try The Demo</h3>
+<a href="http://www.camick.com/java/webstart/HSLColor.jnlp">
+<img class="alignnone size-full wp-image-949" style="border:0;"
+title="Click to start demo" src="http://tips4java.wordpress.com/files/2008/10/launch.png"
+alt="Launch" width="88" height="23" align="center" /></a> - Using Java&trade; Web Start (JRE 6 required)
+
+<h3>Get The Code</h3>
+<a href="http://www.camick.com/java/source/HSLColor.java">HSLColor.java</a>
+
+<h3>Related Reading</h3>
+<a href="http://en.wikipedia.org/wiki/Luminance-Hue-Saturation#Conversion_from_RGB_to_HSL_overview">Conversion From RGB to HSL Overview</a>

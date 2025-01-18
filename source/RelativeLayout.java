@@ -616,7 +616,8 @@ public class RelativeLayout implements LayoutManager2, java.io.Serializable
 				Component component = parent.getComponent(i);
 				Float constraint = constraints.get(component);
 
-				if (constraint != null)
+//				if (constraint != null)
+				if (constraint != null && component.isVisible())
 				{
 					int space = (int)(Math.round(spaceAvailable * constraint.floatValue() / relativeTotal));
 					relativeSpace[i] = space;

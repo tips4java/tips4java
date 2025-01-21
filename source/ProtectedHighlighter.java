@@ -8,7 +8,7 @@ import javax.swing.text.*;
 /**
  *  Class to manage highlighting of protected text within a Document.
  *
- *  The default highlight color will the a "lighter" version of the
+ *  The default highlight color will be a "lighter" version of the
  *  text selection highlighter but can be changed if desired.
  *
  *  Normally highlights are stored with a starting and ending offset.

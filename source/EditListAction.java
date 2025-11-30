@@ -12,7 +12,7 @@ import javax.swing.border.*;
  *  a) the JList must be using the DefaultListModel
  *  b) the data in the model is replaced with a String object
  *
- *  If you which to use a different model or different data then you must
+ *  If you wish to use a different model or different data then you must
  *  extend this class and:
  *
  *  a) invoke the setModelClass(...) method to specify the ListModel you need
@@ -104,3 +104,4 @@ public class EditListAction extends AbstractAction
     	editPopup.add(editTextField);
 	}
 }
+

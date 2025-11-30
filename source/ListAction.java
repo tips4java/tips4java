@@ -5,7 +5,7 @@ import javax.swing.*;
  *	Add an Action to a JList that can be invoked either by using
  *  the keyboard or a mouse.
  *
- *  By default the Enter will will be used to invoke the Action
+ *  By default the Enter key will will be used to invoke the Action
  *  from the keyboard although you can specify and KeyStroke you wish.
  *
  *  A double click with the mouse will invoke the same Action.
@@ -84,3 +84,4 @@ public class ListAction implements MouseListener
 
 	public void mouseReleased(MouseEvent e) {}
 }
+
